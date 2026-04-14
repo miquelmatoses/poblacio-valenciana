@@ -6,14 +6,26 @@
 
 # Poblacio Valenciana
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=20&pause=1000&color=2B54AC&center=true&vCenter=true&random=false&width=600&lines=Evolucio+demografica+per+municipi+(1900%E2%80%932022);547+municipis+%C2%B7+3+provincies+%C2%B7+122+anys+de+dades;Dataset+obert+%C2%B7+Llicencia+CC0+%C2%B7+Domini+public)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=20&pause=1000&color=2B54AC&center=true&vCenter=true&random=false&width=600&lines=Evolucio+demografica+per+municipi+(1900%E2%80%932025);547+municipis+%C2%B7+3+provincies+%C2%B7+125+anys+de+dades;Dataset+obert+%C2%B7+Llicencia+CC0+%C2%B7+Domini+public;Actualitzacio+automatica+des+de+l'API+de+l'INE)](https://git.io/typing-svg)
 
 <br/>
 
 [![Llicencia](https://img.shields.io/badge/Llicencia-CC0--1.0-2b54ac?style=for-the-badge&logo=creativecommons&logoColor=white)](LICENSE)
 [![Municipis](https://img.shields.io/badge/Municipis-547-1a3570?style=for-the-badge&logo=openstreetmap&logoColor=white)](#dataset-principal-datavalencianpopcsv)
-[![Periode](https://img.shields.io/badge/Periode-1900--2022-4a7de0?style=for-the-badge&logo=clockify&logoColor=white)](#que-es-aixo)
+[![Periode](https://img.shields.io/badge/Periode-1900--2025-4a7de0?style=for-the-badge&logo=clockify&logoColor=white)](#que-es-aixo)
 [![INE](https://img.shields.io/badge/Font-INE-c0392b?style=for-the-badge&logo=databricks&logoColor=white)](https://www.ine.es/)
+
+</div>
+
+---
+
+## Visualitzacio
+
+<div align="center">
+
+<img src="assets/bar_chart_race.gif" alt="Bar chart race de la poblacio valenciana" width="700">
+
+*Evolucio de les ciutats mes grans de la Comunitat Valenciana (1900–2025)*
 
 </div>
 
@@ -21,7 +33,7 @@
 
 ## Que es aixo?
 
-Un dataset consolidat amb la **poblacio de cada municipi de la Comunitat Valenciana** des de 1900 fins a 2022. Combina dades dels censos historics (1900–1991) i del padro municipal continu (1996–2022) publicats per l'[INE (Instituto Nacional de Estadistica)](https://www.ine.es/).
+Un dataset consolidat amb la **poblacio de cada municipi de la Comunitat Valenciana** des de 1900 fins a 2025. Combina dades dels censos historics (1900–1991) i del padro municipal continu (1996–2025) publicats per l'[INE (Instituto Nacional de Estadistica)](https://www.ine.es/). Les dades s'actualitzen automaticament cada trimestre via l'API de l'INE.
 
 <div align="center">
 
@@ -62,8 +74,15 @@ poblacio-valenciana/
 |  |- castello_censos_1900-1991.csv
 |  |- valencia_padro_1996-2022.csv
 |  +- valencia_censos_1900-1991.csv
+|- scripts/
+|  |- update_data.py             # Descarrega dades de l'API de l'INE
+|  |- generate_chart.py          # Genera la visualitzacio bar chart race
+|  +- requirements.txt
 |- assets/
-|  +- banner.svg
+|  |- banner.svg
+|  +- bar_chart_race.gif         # Animacio generada automaticament
+|- .github/workflows/
+|  +- update.yml                 # Actualitzacio automatica trimestral
 |- LICENSE
 +- README.md
 ```
@@ -140,6 +159,23 @@ Les dades provenen de l'[Instituto Nacional de Estadistica (INE)](https://www.in
 |:---|:---:|:---|
 | **Padro municipal continu** | 1996–2022 | Xifres oficials de poblacio per municipi |
 | **Censos de poblacio** | 1900–1991 | Serie historica censal |
+
+---
+
+## Actualitzacio automatica
+
+Les dades es descarreguen directament de l'[API de l'INE](https://servicios.ine.es/wstempus/js/) i es processen amb Python.
+
+```bash
+# Actualitzar dades manualment
+pip install -r scripts/requirements.txt
+python scripts/update_data.py
+
+# Regenerar visualitzacio
+python scripts/generate_chart.py
+```
+
+Un [GitHub Actions workflow](.github/workflows/update.yml) executa aquest proces automaticament cada trimestre.
 
 ---
 
