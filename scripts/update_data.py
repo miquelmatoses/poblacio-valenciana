@@ -86,14 +86,94 @@ def parse_censos(series: list[dict]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+PROVINCE_NAMES = {
+    "Alicante", "Castellón", "Castellon", "Valencia",
+    "Alicante/Alacant", "Castellón/Castelló", "Valencia/València",
+    "Alacant", "Castelló", "València",
+}
+
+
 def is_province_total(city: str) -> bool:
     code = city.split()[0] if city else ""
-    return len(code) == 2 and code.isdigit()
+    # Provincial totals have 2-digit codes (e.g., "03 Alicante/Alacant")
+    if len(code) == 2 and code.isdigit():
+        return True
+    # Census data may have prefixes like "Población de Hecho: Valencia"
+    name = city
+    for prefix in ("Población de Hecho: ", "Población de Derecho: ", "Total: "):
+        if name.startswith(prefix):
+            name = name[len(prefix):]
+    # Only match exact province names (not "Castellón de la Plana" etc.)
+    return name.strip() in PROVINCE_NAMES
 
 
 def is_disappeared(city: str) -> bool:
     code = city.split()[0] if city else ""
     return code.endswith("999")
+
+
+# Mapping of Castilian names to Valencian names for municipalities
+VALENCIAN_NAMES = {
+    # Bilingual forms (with slash)
+    "Alicante/Alacant": "Alacant",
+    "Alcoy/Alcoi": "Alcoi",
+    "Elche/Elx": "Elx",
+    "Orihuela/Orihuela": "Oriola",
+    "San Vicente del Raspeig/Sant Vicent del Raspeig": "Sant Vicent del Raspeig",
+    "Castellón de la Plana/Castelló de la Plana": "Castelló de la Plana",
+    "Valencia/València": "València",
+    "Sagunto/Sagunt": "Sagunt",
+    "Villarreal/Vila-real": "Vila-real",
+    "Játiva/Xàtiva": "Xàtiva",
+    "Denia/Dénia": "Dénia",
+    "Burriana/Borriana": "Borriana",
+    "Onteniente/Ontinyent": "Ontinyent",
+    "Torrente/Torrent": "Torrent",
+    "Burjasot/Burjassot": "Burjassot",
+    "Aldaya/Aldaia": "Aldaia",
+    "Alcira/Alzira": "Alzira",
+    # Castilian-only forms (padro data)
+    "Alicante": "Alacant",
+    "Elche": "Elx",
+    "Orihuela": "Oriola",
+    "Alcoy": "Alcoi",
+    "San Vicente del Raspeig": "Sant Vicent del Raspeig",
+    "Castellón de la Plana": "Castelló de la Plana",
+    "Sagunto": "Sagunt",
+    "Burriana": "Borriana",
+    "Torrevieja": "Torrevella",
+    "Gandía": "Gandia",
+    "Villena": "Villena",
+    "Villajoyosa/la Vila Joiosa": "la Vila Joiosa",
+    "Villajoyosa": "la Vila Joiosa",
+    "Jávea/Xàbia": "Xàbia",
+    "Jávea": "Xàbia",
+    "Novelda": "Novelda",
+    "Petrer/Petrel": "Petrer",
+    "Crevillente/Crevillent": "Crevillent",
+    "Crevillente": "Crevillent",
+    "Santa Pola": "Santa Pola",
+    "Campello (el)/el Campello": "el Campello",
+    "Calpe/Calp": "Calp",
+    "Altea": "Altea",
+    "Ibi": "Ibi",
+    "Aspe": "Asp",
+    "Muchamiel/Mutxamel": "Mutxamel",
+    "Muchamiel": "Mutxamel",
+    "Pilar de la Horadada": "Pilar de la Horadada",
+    "Rojales": "Rojals",
+    "San Fulgencio": "San Fulgenci",
+    "Alfaz del Pi/l'Alfàs del Pi": "l'Alfàs del Pi",
+    "Ondara": "Ondara",
+    "Pedreguer": "Pedreguer",
+    # Census historical forms
+    "Játiva": "Xàtiva",
+    "Onteniente": "Ontinyent",
+    "Torrente": "Torrent",
+    "Burjasot": "Burjassot",
+    "Aldaya": "Aldaia",
+    "Alcira": "Alzira",
+}
 
 
 def clean_municipality_name(name: str) -> str:
@@ -106,7 +186,18 @@ def clean_municipality_name(name: str) -> str:
     for prefix in prefixes:
         if name.startswith(prefix):
             name = name[len(prefix):]
-    return name.strip()
+    name = name.strip()
+
+    # Use Valencian name if available
+    if name in VALENCIAN_NAMES:
+        return VALENCIAN_NAMES[name]
+
+    # For bilingual names with slash, take the first part (Valencian in most INE data)
+    if "/" in name:
+        parts = name.split("/")
+        return parts[0].strip()
+
+    return name
 
 
 def save_raw(df: pd.DataFrame, province: str, period: str):
@@ -143,14 +234,14 @@ def main():
     log.info("\nConsolidant dataset...")
     consolidated = pd.concat(all_frames, ignore_index=True)
 
-    # Netejar noms de municipis
-    consolidated["city"] = consolidated["city"].apply(clean_municipality_name)
-
-    # Eliminar totals provincials i municipis desapareguts
+    # Eliminar totals provincials i municipis desapareguts ABANS de netejar noms
     mask = consolidated["city"].apply(
         lambda c: not is_province_total(c) and not is_disappeared(c)
     )
     consolidated = consolidated[mask]
+
+    # Netejar noms de municipis (valencianitzar)
+    consolidated["city"] = consolidated["city"].apply(clean_municipality_name)
 
     # Eliminar duplicats (censos i padro poden solapar-se)
     consolidated = consolidated.drop_duplicates(subset=["city", "year"], keep="first")

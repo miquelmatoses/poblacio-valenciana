@@ -22,11 +22,23 @@ N_BARS = 12
 STEPS_PER_PERIOD = 3
 PERIOD_LENGTH = 300
 
-# Palette based on the project's blue (#2b54ac)
+# Cercol brand palette + role colors
 COLORS = [
-    "#2b54ac", "#1a3570", "#4a7de0", "#3366cc", "#1e4d8c",
-    "#5b8fd9", "#7ba3e0", "#3a6fbf", "#0f2b5c", "#6690cc",
-    "#4478b3", "#2a4f99", "#8ab4e6", "#1c3d80", "#5c85c0",
+    "#cf3339",  # Red (brand primary)
+    "#0047ba",  # Blue (brand secondary)
+    "#427c42",  # Green (brand)
+    "#f1c22f",  # Yellow (brand)
+    "#d46010",  # Orange (R02 Wolf)
+    "#1a8c60",  # Emerald (R06 Falcon)
+    "#0d8888",  # Teal (R07 Octopus)
+    "#3355c8",  # Cobalt (R09 Bee)
+    "#6630a8",  # Indigo (R10 Bear)
+    "#a030a0",  # Violet (R11 Fox)
+    "#b03070",  # Crimson (R12 Badger)
+    "#c08800",  # Amber (R03 Elephant)
+    "#6a8800",  # Olive (R04 Owl)
+    "#1a68b0",  # Cerulean (R08 Tortoise)
+    "#111111",  # Black (brand)
 ]
 
 
