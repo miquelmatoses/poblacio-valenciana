@@ -19,7 +19,7 @@
 
 ---
 
-## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-data-blue.svg" width="20" height="20" /> Visualització
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-map-blue.svg" width="20" height="20" /> Visualització
 
 <div align="center">
 
@@ -47,7 +47,7 @@ Un dataset consolidat amb la **població de cada municipi de la Comunitat Valenc
 
 ---
 
-## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-target-blue.svg" width="20" height="20" /> En xifres
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-chart-blue.svg" width="20" height="20" /> En xifres
 
 <div align="center">
 
@@ -151,7 +151,7 @@ només_total:            El dataset consolidat no inclou desglossament per sexe
 
 ---
 
-## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-check-green.svg" width="20" height="20" /> Font de les dades
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-link-blue.svg" width="20" height="20" /> Font de les dades
 
 Les dades provenen de l'[Instituto Nacional de Estadística (INE)](https://www.ine.es/):
 
