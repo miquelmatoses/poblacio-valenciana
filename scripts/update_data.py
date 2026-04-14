@@ -96,6 +96,19 @@ def is_disappeared(city: str) -> bool:
     return code.endswith("999")
 
 
+def clean_municipality_name(name: str) -> str:
+    # Remove common INE prefixes from census data
+    prefixes = [
+        "Población de Hecho: ",
+        "Población de Derecho: ",
+        "Total: ",
+    ]
+    for prefix in prefixes:
+        if name.startswith(prefix):
+            name = name[len(prefix):]
+    return name.strip()
+
+
 def save_raw(df: pd.DataFrame, province: str, period: str):
     filename = f"{province}_{period}.csv"
     path = RAW_DIR / filename
@@ -129,6 +142,9 @@ def main():
     # Consolidar
     log.info("\nConsolidant dataset...")
     consolidated = pd.concat(all_frames, ignore_index=True)
+
+    # Netejar noms de municipis
+    consolidated["city"] = consolidated["city"].apply(clean_municipality_name)
 
     # Eliminar totals provincials i municipis desapareguts
     mask = consolidated["city"].apply(
