@@ -50,7 +50,8 @@ def fetch_table(table_id: int) -> list[dict]:
 
 def parse_padro(series: list[dict]) -> pd.DataFrame:
     rows = []
-    for s in series:
+    # Skip first 3 series — they're the provincial total (Total/Hombres/Mujeres)
+    for s in series[3:]:
         name = s["Nombre"]
         parts = name.split(".")
         municipality = parts[0].strip()
@@ -71,7 +72,8 @@ def parse_padro(series: list[dict]) -> pd.DataFrame:
 
 def parse_censos(series: list[dict]) -> pd.DataFrame:
     rows = []
-    for s in series:
+    # Skip first series — it's always the provincial total
+    for s in series[1:]:
         name = s["Nombre"]
         municipality = name.split(".")[0].strip()
         for d in s.get("Data", []):
@@ -86,25 +88,11 @@ def parse_censos(series: list[dict]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-PROVINCE_NAMES = {
-    "Alicante", "Castellón", "Castellon", "Valencia",
-    "Alicante/Alacant", "Castellón/Castelló", "Valencia/València",
-    "Alacant", "Castelló", "València",
-}
-
-
 def is_province_total(city: str) -> bool:
+    """Provincial totals from padro have 2-digit codes like '03 Alicante/Alacant'.
+    Census provincial totals are already excluded by skipping the first series."""
     code = city.split()[0] if city else ""
-    # Provincial totals have 2-digit codes (e.g., "03 Alicante/Alacant")
-    if len(code) == 2 and code.isdigit():
-        return True
-    # Census data may have prefixes like "Población de Hecho: Valencia"
-    name = city
-    for prefix in ("Población de Hecho: ", "Población de Derecho: ", "Total: "):
-        if name.startswith(prefix):
-            name = name[len(prefix):]
-    # Only match exact province names (not "Castellón de la Plana" etc.)
-    return name.strip() in PROVINCE_NAMES
+    return len(code) == 2 and code.isdigit()
 
 
 def is_disappeared(city: str) -> bool:
@@ -166,13 +154,15 @@ VALENCIAN_NAMES = {
     "Alfaz del Pi/l'Alfàs del Pi": "l'Alfàs del Pi",
     "Ondara": "Ondara",
     "Pedreguer": "Pedreguer",
-    # Census historical forms
+    # Census historical forms (no slash, Castilian only)
     "Játiva": "Xàtiva",
     "Onteniente": "Ontinyent",
     "Torrente": "Torrent",
     "Burjasot": "Burjassot",
     "Aldaya": "Aldaia",
     "Alcira": "Alzira",
+    "Valencia": "València",
+    "Castellon de la Plana": "Castelló de la Plana",
 }
 
 
