@@ -19,7 +19,7 @@
 
 ---
 
-## Visualització
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-data-blue.svg" width="20" height="20" /> Visualització
 
 <div align="center">
 
@@ -31,7 +31,7 @@
 
 ---
 
-## Què és això?
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-globe-blue.svg" width="20" height="20" /> Què és això?
 
 Un dataset consolidat amb la **població de cada municipi de la Comunitat Valenciana** des de 1900 fins a 2025. Combina dades dels censos històrics (1900–1991) i del padró municipal continu (1996–2025) publicats per l'[INE (Instituto Nacional de Estadística)](https://www.ine.es/). Les dades s'actualitzen automàticament cada trimestre via l'API de l'INE.
 
@@ -47,7 +47,7 @@ Un dataset consolidat amb la **població de cada municipi de la Comunitat Valenc
 
 ---
 
-## En xifres
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-target-blue.svg" width="20" height="20" /> En xifres
 
 <div align="center">
 
@@ -89,7 +89,7 @@ poblacio-valenciana/
 
 ---
 
-## Dataset principal: `data/valencianpop.csv`
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-data-blue.svg" width="20" height="20" /> Dataset principal: `data/valencianpop.csv`
 
 Fitxer CSV llest per a usar directament en qualsevol eina d'anàlisi.
 
@@ -151,7 +151,7 @@ només_total:            El dataset consolidat no inclou desglossament per sexe
 
 ---
 
-## Font de les dades
+## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-check-green.svg" width="20" height="20" /> Font de les dades
 
 Les dades provenen de l'[Instituto Nacional de Estadística (INE)](https://www.ine.es/):
 
