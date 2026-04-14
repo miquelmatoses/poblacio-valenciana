@@ -1,19 +1,19 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a3570,50:2b54ac,100:4a7de0&height=120&section=header&text=&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0047ba,50:0047ba,100:0047ba&height=120&section=header&text=&animation=fadeIn" width="100%"/>
 
 <img src="assets/banner.svg" alt="Mapa de la Comunitat Valenciana format pels seus municipis" width="550">
 
 # Població Valenciana
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=20&pause=1000&color=2B54AC&center=true&vCenter=true&random=false&width=600&lines=Evoluci%C3%B3+demogr%C3%A0fica+per+municipi+(1900%E2%80%932025);678+municipis+%C2%B7+3+prov%C3%ADncies+%C2%B7+125+anys+de+dades;Dataset+obert+%C2%B7+Llic%C3%A8ncia+CC0+%C2%B7+Domini+p%C3%BAblic;Actualitzaci%C3%B3+autom%C3%A0tica+des+de+l'API+de+l'INE)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Roboto&weight=600&size=20&pause=1000&color=0047BA&center=true&vCenter=true&random=false&width=600&lines=Evoluci%C3%B3+demogr%C3%A0fica+per+municipi+(1900%E2%80%932025);678+municipis+%C2%B7+3+prov%C3%ADncies+%C2%B7+125+anys+de+dades;Dataset+obert+%C2%B7+Llic%C3%A8ncia+CC0+%C2%B7+Domini+p%C3%BAblic;Actualitzaci%C3%B3+autom%C3%A0tica+des+de+l'API+de+l'INE)](https://git.io/typing-svg)
 
 <br/>
 
-[![Llicència](https://img.shields.io/badge/Llic%C3%A8ncia-CC0--1.0-2b54ac?style=for-the-badge&logo=creativecommons&logoColor=white)](LICENSE)
-[![Municipis](https://img.shields.io/badge/Municipis-678-1a3570?style=for-the-badge&logo=openstreetmap&logoColor=white)](#dataset-principal-datavalencianpopcsv)
-[![Període](https://img.shields.io/badge/Per%C3%ADode-1900--2025-4a7de0?style=for-the-badge&logo=clockify&logoColor=white)](#qu%C3%A8-%C3%A9s-aix%C3%B2)
-[![INE](https://img.shields.io/badge/Font-INE-c0392b?style=for-the-badge&logo=databricks&logoColor=white)](https://www.ine.es/)
+[![Llicència](https://img.shields.io/badge/Llic%C3%A8ncia-CC0--1.0-0047ba?style=for-the-badge&logo=creativecommons&logoColor=white)](LICENSE)
+[![Municipis](https://img.shields.io/badge/Municipis-678-0047ba?style=for-the-badge&logo=openstreetmap&logoColor=white)](#dataset-principal-datavalencianpopcsv)
+[![Període](https://img.shields.io/badge/Per%C3%ADode-1900--2025-0047ba?style=for-the-badge&logo=clockify&logoColor=white)](#qu%C3%A8-%C3%A9s-aix%C3%B2)
+[![INE](https://img.shields.io/badge/Font-INE-cf3339?style=for-the-badge&logo=databricks&logoColor=white)](https://www.ine.es/)
 
 </div>
 
@@ -41,7 +41,7 @@ Un dataset consolidat amb la **població de cada municipi de la Comunitat Valenc
 |:---:|:---:|:---:|
 | **Alacant** | **Castelló** | **València** |
 | 141 municipis | 135 municipis | 266 municipis |
-| ![Alacant](https://img.shields.io/badge/prov%C3%ADncia_03-2b54ac?style=flat-square) | ![Castelló](https://img.shields.io/badge/prov%C3%ADncia_12-1a3570?style=flat-square) | ![València](https://img.shields.io/badge/prov%C3%ADncia_46-4a7de0?style=flat-square) |
+| ![Alacant](https://img.shields.io/badge/prov%C3%ADncia_03-0047ba?style=flat-square) | ![Castelló](https://img.shields.io/badge/prov%C3%ADncia_12-0047ba?style=flat-square) | ![València](https://img.shields.io/badge/prov%C3%ADncia_46-0047ba?style=flat-square) |
 
 </div>
 
@@ -97,13 +97,13 @@ Fitxer CSV llest per a usar directament en qualsevol eina d'anàlisi.
 
 | Columna | Tipus | Descripció |
 |:---:|:---:|:---|
-| `city` | ![text](https://img.shields.io/badge/text-2b54ac?style=flat-square) | Nom del municipi en valencià (ex: `Alacant`) |
-| `year` | ![int](https://img.shields.io/badge/int-1a3570?style=flat-square) | Any (1900, 1910, ..., 1991, 1996, 1997, ..., 2025) |
-| `population` | ![int](https://img.shields.io/badge/int-1a3570?style=flat-square) | Població total del municipi |
+| `city` | ![text](https://img.shields.io/badge/text-0047ba?style=flat-square) | Nom del municipi en valencià (ex: `Alacant`) |
+| `year` | ![int](https://img.shields.io/badge/int-0047ba?style=flat-square) | Any (1900, 1910, ..., 1991, 1996, 1997, ..., 2025) |
+| `population` | ![int](https://img.shields.io/badge/int-0047ba?style=flat-square) | Població total del municipi |
 
 </div>
 
-> ![CSV](https://img.shields.io/badge/21.032_registres-2b54ac?style=flat-square) ![Municipis](https://img.shields.io/badge/678_municipis-1a3570?style=flat-square) ![Delimiter](https://img.shields.io/badge/delimiter:_coma-4a7de0?style=flat-square) ![Encoding](https://img.shields.io/badge/encoding:_UTF--8-2b54ac?style=flat-square)
+> ![CSV](https://img.shields.io/badge/21.032_registres-0047ba?style=flat-square) ![Municipis](https://img.shields.io/badge/678_municipis-0047ba?style=flat-square) ![Delimiter](https://img.shields.io/badge/delimiter:_coma-0047ba?style=flat-square) ![Encoding](https://img.shields.io/badge/encoding:_UTF--8-0047ba?style=flat-square)
 
 ### Exemple
 
@@ -126,12 +126,12 @@ Dades originals descarregades directament de l'INE. Cada fitxer correspon a una 
 
 | Fitxer | Taula INE | Província | Període | Contingut |
 |:---|:---:|:---:|:---:|:---|
-| `alacant_padro_1996-2025.csv` | ![2856](https://img.shields.io/badge/2856-2b54ac?style=flat-square) | Alacant | 1996–2025 | Població per municipi i sexe |
-| `castello_padro_1996-2025.csv` | ![2865](https://img.shields.io/badge/2865-2b54ac?style=flat-square) | Castelló | 1996–2025 | Població per municipi i sexe |
-| `valencia_padro_1996-2025.csv` | ![2903](https://img.shields.io/badge/2903-2b54ac?style=flat-square) | València | 1996–2025 | Població per municipi i sexe |
-| `alacant_censos_1900-1991.csv` | ![3036](https://img.shields.io/badge/3036-1a3570?style=flat-square) | Alacant | 1900–1991 | Censos històrics |
-| `castello_censos_1900-1991.csv` | ![3045](https://img.shields.io/badge/3045-1a3570?style=flat-square) | Castelló | 1900–1991 | Censos històrics |
-| `valencia_censos_1900-1991.csv` | ![3079](https://img.shields.io/badge/3079-1a3570?style=flat-square) | València | 1900–1991 | Censos històrics |
+| `alacant_padro_1996-2025.csv` | ![2856](https://img.shields.io/badge/2856-0047ba?style=flat-square) | Alacant | 1996–2025 | Població per municipi i sexe |
+| `castello_padro_1996-2025.csv` | ![2865](https://img.shields.io/badge/2865-0047ba?style=flat-square) | Castelló | 1996–2025 | Població per municipi i sexe |
+| `valencia_padro_1996-2025.csv` | ![2903](https://img.shields.io/badge/2903-0047ba?style=flat-square) | València | 1996–2025 | Població per municipi i sexe |
+| `alacant_censos_1900-1991.csv` | ![3036](https://img.shields.io/badge/3036-0047ba?style=flat-square) | Alacant | 1900–1991 | Censos històrics |
+| `castello_censos_1900-1991.csv` | ![3045](https://img.shields.io/badge/3045-0047ba?style=flat-square) | Castelló | 1900–1991 | Censos històrics |
+| `valencia_censos_1900-1991.csv` | ![3079](https://img.shields.io/badge/3079-0047ba?style=flat-square) | València | 1900–1991 | Censos històrics |
 
 </div>
 
@@ -197,8 +197,8 @@ Licensed under [CC0 1.0 (Public Domain)](LICENSE).
 
 <div align="center">
 
-![Last Updated](https://img.shields.io/badge/Darrera_actualitzaci%C3%B3-Abril_2026-2b54ac?style=flat-square)
+![Last Updated](https://img.shields.io/badge/Darrera_actualitzaci%C3%B3-Abril_2026-0047ba?style=flat-square)
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:4a7de0,50:2b54ac,100:1a3570&height=80&section=footer&text=&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0047ba,50:0047ba,100:0047ba&height=80&section=footer&text=&animation=fadeIn" width="100%"/>
 
 </div>
