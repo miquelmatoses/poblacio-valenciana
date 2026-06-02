@@ -1,2 +1,27 @@
+# macOS
 .DS_Store
+
+# Temp
 *.tmp
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors
+.vscode/
+.idea/
+
+# Claude Code local settings (CLAUDE.md sí que es trackeja)
+.claude/
+
+# Build artifacts intermedis del bar chart race
+assets/bar_chart_race_opt.gif
