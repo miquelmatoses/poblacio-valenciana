@@ -26,3 +26,5 @@ CLAUDE.md
 
 # Build artifacts intermedis del bar chart race
 assets/bar_chart_race_opt.gif
+.claude.json
+/CLAUDE_*.md
