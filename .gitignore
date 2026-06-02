@@ -20,8 +20,9 @@ env/
 .vscode/
 .idea/
 
-# Claude Code local settings (CLAUDE.md sí que es trackeja)
+# Claude Code (autoconsum, no es trackeja)
 .claude/
+CLAUDE.md
 
 # Build artifacts intermedis del bar chart race
 assets/bar_chart_race_opt.gif
