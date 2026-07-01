@@ -49,9 +49,21 @@
 
 <img src="assets/viz/06_growth_heatmap.png" alt="Heatmap de creixement anual per ciutat" width="820">
 
-<img src="assets/viz/07_comarca_heatmap.png" alt="Heatmap de creixement anual per comarca 2000–2025" width="640">
+<img src="assets/viz/07_comarca_heatmap.png" alt="Heatmap de creixement anual per comarca 1900–2025" width="760">
 
-*El litoral turístic es dispara (Benidorm +2.700 % des de 1950) mentre l'interior es despobla. Els heatmaps mostren el creixement **anual mitjà** (comparable entre trams de 10 i 5 anys): el boom del desarrollisme (1960–1981), la bambolla de la construcció (2000–2010), la crisi (2010–2015) i la recuperació recent.*
+*El litoral turístic es dispara (Benidorm +2.700 % des de 1950) mentre l'interior es despobla. Els heatmaps mostren el creixement **anual mitjà** (comparable entre trams de 10 i 5 anys): l'èxode rural de l'interior (1950–1981, roig), el boom del desarrollisme, la bambolla de la construcció (2000–2010), la crisi (2010–2015) i la recuperació recent.*
+
+</div>
+
+### El mapa del despoblament
+
+<div align="center">
+
+<img src="assets/viz/09_map_change.png" alt="Mapa del canvi de població per municipi 1950–2025" width="560">
+
+*Canvi de població per municipi (1950→2025): la costa creix (verd), l'interior es buida (roig). La «Comunitat Valenciana buidada».*
+
+🗺️ **[Mapa interactiu](https://htmlpreview.github.io/?https://github.com/miquelmatoses/poblacio-valenciana/blob/main/assets/map/index.html)** — passa el ratolí per veure cada municipi.
 
 </div>
 
@@ -107,7 +119,8 @@ Un dataset consolidat amb la **població de cada municipi de la Comunitat Valenc
 poblacio-valenciana/
 |- data/
 |  |- valencianpop.csv           # Dataset consolidat i net (llest per a anàlisi)
-|  +- comarques.csv              # Referència municipi -> comarca (per a agregats)
+|  |- comarques.csv              # Referència municipi -> codi INE -> comarca
+|  +- municipis-cv.geojson       # Límits municipals (per als mapes)
 |- raw/
 |  |- alacant_padro_1996-2025.csv
 |  |- alacant_censos_1900-1991.csv
@@ -123,7 +136,8 @@ poblacio-valenciana/
 |- assets/
 |  |- banner.svg
 |  |- bar_chart_race.gif         # Animació generada automàticament
-|  +- viz/                       # Gràfics estàtics del README (PNG)
+|  |- viz/                       # Gràfics estàtics del README (PNG)
+|  +- map/                       # Mapa interactiu (Leaflet, HTML)
 |- .github/workflows/
 |  +- update.yml                 # Actualització automàtica trimestral
 |- LICENSE

@@ -10,6 +10,7 @@ Us:
 
 import csv
 import glob
+import json
 import os
 from pathlib import Path
 
@@ -21,6 +22,9 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
+from matplotlib.collections import PatchCollection
+from matplotlib.colors import TwoSlopeNorm
+from matplotlib.patches import Polygon as MplPolygon
 
 from update_data import clean_municipality_name, is_disappeared, is_province_total
 
@@ -201,17 +205,18 @@ def growth_heatmap(df):
     save(fig, "06_growth_heatmap.png")
 
 
-# 7 — Heatmap de creixement per comarca (epoca moderna, cada 5 anys)
+# 7 — Heatmap de creixement per comarca (dècades fins 1991 + 5 anys fins 2025)
 def comarca_heatmap(df):
     cmap = {r["city"]: r["comarca"] for r in csv.DictReader(open(ROOT / "data" / "comarques.csv"))}
     df = df.assign(comarca=df["city"].map(cmap)).dropna(subset=["comarca"])
     pv = df.groupby(["comarca", "year"])["population"].sum().unstack("year")
-    years = [2000, 2005, 2010, 2015, 2020, 2025]
+    years = [1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1981, 1991,
+             2000, 2005, 2010, 2015, 2020, 2025]
     order = df[df["year"] == df["year"].max()].groupby("comarca")["population"].sum().sort_values(ascending=False).index
     pv = pv.reindex(index=order)
     m = annualized(pv, years)
-    fig, ax = plt.subplots(figsize=(8.5, 9))
-    _heatmap(fig, ax, m, "Creixement anual per comarca, 2000–2025")
+    fig, ax = plt.subplots(figsize=(11, 9))
+    _heatmap(fig, ax, m, "Creixement anual per comarca, 1900–2025")
     save(fig, "07_comarca_heatmap.png")
 
 
@@ -233,6 +238,92 @@ def province_area(df):
     save(fig, "08_province_area.png")
 
 
+# 9/10 — Mapa: canvi de població per municipi, 1950 → últim any
+def _change_by_codi(df, base=1950):
+    """codi_ine -> % de canvi de població base->últim any (agregant grafies del mateix municipi)."""
+    city2codi = {r["city"]: r["codi_ine"] for r in csv.DictReader(open(ROOT / "data" / "comarques.csv"))}
+    d = df.assign(codi=df["city"].map(city2codi)).dropna(subset=["codi"])
+    pv = d.groupby(["codi", "year"])["population"].sum().unstack("year")
+    y = df["year"].max()
+    if base not in pv or y not in pv:
+        return {}, base, y
+    chg = (pv[y] / pv[base] - 1) * 100
+    return chg.dropna().to_dict(), base, y
+
+
+def _rings(geom):
+    """Llista d'anells exteriors (lon,lat) per a Polygon i MultiPolygon."""
+    if geom["type"] == "Polygon":
+        return [geom["coordinates"][0]]
+    return [poly[0] for poly in geom["coordinates"]]
+
+
+def choropleth_map(df):
+    change, base, y = _change_by_codi(df)
+    geo = json.load(open(ROOT / "data" / "municipis-cv.geojson"))
+    patches, vals = [], []
+    for f in geo["features"]:
+        v = change.get(f["properties"]["codi_ine"], np.nan)
+        for ring in _rings(f["geometry"]):
+            patches.append(MplPolygon(ring, closed=True))
+            vals.append(v)
+    cmap = plt.get_cmap("RdYlGn").copy()
+    cmap.set_bad("#e0e0e0")
+    norm = TwoSlopeNorm(vcenter=0, vmin=-75, vmax=200)
+    pc = PatchCollection(patches, cmap=cmap, norm=norm, edgecolor="white", linewidth=0.15)
+    pc.set_array(np.ma.masked_invalid(vals))
+    fig, ax = plt.subplots(figsize=(9, 9))
+    ax.add_collection(pc)
+    ax.autoscale_view()
+    ax.set_aspect(1 / np.cos(np.radians(39.5)))  # correcció lat -> no aixafar el mapa
+    ax.axis("off")
+    ax.set_title(f"Canvi de població per municipi, {base}→{y}",
+                 fontsize=14, weight="bold", color=BLACK)
+    cb = fig.colorbar(pc, ax=ax, shrink=0.5, extend="both")
+    cb.set_label(f"% de canvi {base}→{y}")
+    save(fig, "09_map_change.png")
+
+
+def interactive_map(df):
+    change, base, y = _change_by_codi(df)
+    geo = json.load(open(ROOT / "data" / "municipis-cv.geojson"))
+    for f in geo["features"]:
+        f["properties"]["change"] = round(change.get(f["properties"]["codi_ine"], None) or 0, 1) \
+            if f["properties"]["codi_ine"] in change else None
+    out = ROOT / "assets" / "map"
+    out.mkdir(parents=True, exist_ok=True)
+    html = _MAP_HTML.replace("__GEOJSON__", json.dumps(geo)) \
+                    .replace("__BASE__", str(base)).replace("__YEAR__", str(y))
+    (out / "index.html").write_text(html, encoding="utf-8")
+    print(f"  assets/map/index.html")
+
+
+_MAP_HTML = """<!DOCTYPE html><html lang="ca"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvi de població per municipi (__BASE__–__YEAR__)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>html,body,#map{height:100%;margin:0;font-family:Roboto,sans-serif}
+.leaflet-tooltip{font-family:Roboto,sans-serif}</style></head><body>
+<div id="map"></div><script>
+const geo=__GEOJSON__;
+function color(v){if(v===null)return '#e0e0e0';
+ const s=[[-75,'#a50026'],[-40,'#f46d43'],[-10,'#fee08b'],[10,'#d9ef8b'],[60,'#66bd63'],[200,'#006837']];
+ for(const[t,c]of s)if(v<=t)return c;return '#006837';}
+const map=L.map('map');
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+ {attribution:'&copy; OpenStreetMap, &copy; CARTO'}).addTo(map);
+const layer=L.geoJSON(geo,{style:f=>({fillColor:color(f.properties.change),
+ weight:0.4,color:'#fff',fillOpacity:0.82}),
+ onEachFeature:(f,l)=>{const c=f.properties.change;
+  l.bindTooltip(`<b>${f.properties.municipi}</b><br>${f.properties.comarca}<br>`+
+   (c===null?'sense dades':`${c>0?'+':''}${c}% (__BASE__→__YEAR__)`),{sticky:true});
+  l.on('mouseover',()=>l.setStyle({weight:2,color:'#111'}));
+  l.on('mouseout',()=>layer.resetStyle(l));}}).addTo(map);
+map.fitBounds(layer.getBounds());
+</script></body></html>"""
+
+
 def main():
     print("Generant visualitzacions...")
     df = load()
@@ -244,6 +335,8 @@ def main():
     growth_heatmap(df)
     comarca_heatmap(df)
     province_area(df)
+    choropleth_map(df)
+    interactive_map(df)
     print("Fet.")
 
 
