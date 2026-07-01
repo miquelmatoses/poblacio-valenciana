@@ -3,26 +3,84 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Població Valenciana — dataset obert</title>
-<meta http-equiv="refresh" content="0; url=assets/map/">
-<link rel="canonical" href="assets/map/">
+<title>Població Valenciana — dataset obert (1900–2025)</title>
+<meta name="description" content="Dataset obert de població per municipi de la Comunitat Valenciana, 1900–2025, a partir de l'INE.">
 <style>
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-    font-family:Roboto,system-ui,sans-serif;background:#0047ba;color:#fff;text-align:center;padding:2rem}
-  a{color:#f1c22f;font-weight:600}
-  .card{max-width:32rem}
-  h1{font-size:1.8rem;margin:.2rem 0}
-  p{opacity:.9;line-height:1.5}
+  :root{--blue:#0047ba;--red:#cf3339;--yellow:#f1c22f;--ink:#111}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,system-ui,sans-serif;color:var(--ink);line-height:1.55}
+  a{color:var(--blue)}
+  header{background:var(--blue);color:#fff;padding:3.5rem 1.5rem;text-align:center}
+  header h1{font-size:2.4rem;margin:0 0 .4rem}
+  header p{font-size:1.15rem;opacity:.92;margin:.2rem auto;max-width:38rem}
+  .btns{margin-top:1.6rem;display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;padding:.6rem 1.1rem;border-radius:.5rem;font-weight:600;text-decoration:none}
+  .btn-primary{background:var(--yellow);color:var(--ink)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+  main{max-width:60rem;margin:0 auto;padding:2.5rem 1.5rem}
+  section{margin-bottom:2.8rem}
+  h2{font-size:1.35rem;border-bottom:2px solid var(--yellow);padding-bottom:.3rem}
+  figure{margin:1rem 0;text-align:center}
+  figure img{max-width:100%;border:1px solid #e6e6ea;border-radius:.4rem}
+  figcaption{font-size:.9rem;color:#555;margin-top:.4rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+  .grid img{max-width:100%;border:1px solid #e6e6ea;border-radius:.4rem}
+  .map-link{display:block}
+  footer{background:#f5f6f9;text-align:center;padding:2rem 1.5rem;color:#555;font-size:.9rem}
+  .stats{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin-top:1.4rem;font-size:.95rem}
+  .stats b{color:var(--yellow);font-size:1.3rem;display:block}
 </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Població Valenciana</h1>
-    <p>Dataset obert de població per municipi de la Comunitat Valenciana (1900–2025).</p>
-    <p>Redirigint al <a href="assets/map/">mapa interactiu del despoblament</a>…</p>
-    <p style="margin-top:2rem;font-size:.9rem">
-      Codi i dades: <a href="https://github.com/miquelmatoses/poblacio-valenciana">github.com/miquelmatoses/poblacio-valenciana</a>
-    </p>
+<header>
+  <h1>Població Valenciana</h1>
+  <p>Dataset obert amb la població de cada municipi de la Comunitat Valenciana, <strong>1900–2025</strong>, a partir dels censos i el padró de l'INE.</p>
+  <div class="stats">
+    <div><b>678</b> municipis</div>
+    <div><b>125</b> anys</div>
+    <div><b>21.032</b> registres</div>
+    <div><b>CC0</b> domini públic</div>
   </div>
+  <div class="btns">
+    <a class="btn btn-primary" href="assets/map/">🗺️ Mapa interactiu</a>
+    <a class="btn btn-ghost" href="data/valencianpop.csv" download>⬇️ Descarrega el CSV</a>
+    <a class="btn btn-ghost" href="https://github.com/miquelmatoses/poblacio-valenciana">Codi i documentació</a>
+  </div>
+</header>
+
+<main>
+  <section>
+    <h2>El mapa del despoblament</h2>
+    <a class="map-link" href="assets/map/">
+      <figure>
+        <img src="assets/viz/09_map_change.png" alt="Mapa del canvi de població per municipi 1950–2025">
+        <figcaption>Canvi de població per municipi (1950→2025): la costa creix, l'interior es buida. <strong>Clica per obrir el mapa interactiu →</strong></figcaption>
+      </figure>
+    </a>
+  </section>
+
+  <section>
+    <h2>Creixement i declivi</h2>
+    <div class="grid">
+      <img src="assets/viz/01_total_population.png" alt="Població total de la CV">
+      <img src="assets/viz/03_winners_losers.png" alt="Guanyadors i perdedors des de 1950">
+      <img src="assets/viz/07_comarca_heatmap.png" alt="Heatmap de creixement per comarca 1900–2025">
+      <img src="assets/viz/08_province_area.png" alt="Població per província">
+    </div>
+  </section>
+
+  <section>
+    <h2>Ciutats i evolució</h2>
+    <figure>
+      <img src="assets/bar_chart_race.gif" alt="Bar chart race de les ciutats més grans">
+      <figcaption>Evolució de les ciutats més grans de la Comunitat Valenciana.</figcaption>
+    </figure>
+  </section>
+</main>
+
+<footer>
+  Dades: <a href="https://www.ine.es/">INE</a> · Llicència <a href="https://github.com/miquelmatoses/poblacio-valenciana/blob/main/LICENSE">CC0 1.0</a> ·
+  <a href="https://github.com/miquelmatoses/poblacio-valenciana">github.com/miquelmatoses/poblacio-valenciana</a>
+</footer>
 </body>
 </html>
