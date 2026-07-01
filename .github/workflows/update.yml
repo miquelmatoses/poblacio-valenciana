@@ -31,6 +31,9 @@ jobs:
       - name: Generar visualitzacio
         run: python scripts/generate_chart.py
 
+      - name: Generar visualitzacions estatiques
+        run: python scripts/generate_visuals.py
+
       - name: Optimitzar GIF
         run: |
           gifsicle -O3 --lossy=80 --colors 64 assets/bar_chart_race.gif -o assets/bar_chart_race_opt.gif

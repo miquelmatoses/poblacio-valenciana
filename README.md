@@ -29,6 +29,46 @@
 
 </div>
 
+### Creixement global
+
+<div align="center">
+
+<img src="assets/viz/01_total_population.png" alt="Població total de la Comunitat Valenciana 1900–2025" width="700">
+
+<img src="assets/viz/08_province_area.png" alt="Població per província 1900–2025" width="700">
+
+*La població de la CV s'ha triplicat en 125 anys; València concentra el gruix i Alacant és la que més accelera.*
+
+</div>
+
+### Qui creix i qui perd
+
+<div align="center">
+
+<img src="assets/viz/03_winners_losers.png" alt="Guanyadors i perdedors de població des de 1950" width="640">
+
+<img src="assets/viz/06_growth_heatmap.png" alt="Heatmap de creixement anual per ciutat" width="820">
+
+<img src="assets/viz/07_comarca_heatmap.png" alt="Heatmap de creixement anual per comarca 2000–2025" width="640">
+
+*El litoral turístic es dispara (Benidorm +2.700 % des de 1950) mentre l'interior es despobla. Els heatmaps mostren el creixement **anual mitjà** (comparable entre trams de 10 i 5 anys): el boom del desarrollisme (1960–1981), la bambolla de la construcció (2000–2010), la crisi (2010–2015) i la recuperació recent.*
+
+</div>
+
+### Ciutats i distribució
+
+<div align="center">
+
+<img src="assets/viz/04_top10_trajectories.png" alt="Trajectòria de les 10 ciutats més grans" width="700">
+
+<img src="assets/viz/02_top_bottom.png" alt="Municipis més grans i més menuts" width="760">
+
+<img src="assets/viz/05_rank_size.png" alt="Distribució rank-size (Zipf)" width="520">
+
+*Les mides municipals segueixen de prop la llei de Zipf: el segon municipi té ~½ del primer, el tercer ~⅓, etc.*
+
+</div>
+
 ---
 
 ## <img src="https://raw.githubusercontent.com/miquelmatoses/mm-design/main/icons/readme/icon-globe-blue.svg" width="20" height="20" /> Què és això?
@@ -66,7 +106,8 @@ Un dataset consolidat amb la **població de cada municipi de la Comunitat Valenc
 ```
 poblacio-valenciana/
 |- data/
-|  +- valencianpop.csv           # Dataset consolidat i net (llest per a anàlisi)
+|  |- valencianpop.csv           # Dataset consolidat i net (llest per a anàlisi)
+|  +- comarques.csv              # Referència municipi -> comarca (per a agregats)
 |- raw/
 |  |- alacant_padro_1996-2025.csv
 |  |- alacant_censos_1900-1991.csv
@@ -77,10 +118,12 @@ poblacio-valenciana/
 |- scripts/
 |  |- update_data.py             # Descarrega dades de l'API de l'INE
 |  |- generate_chart.py          # Genera la visualització bar chart race
+|  |- generate_visuals.py        # Genera els gràfics estàtics (assets/viz/)
 |  +- requirements.txt
 |- assets/
 |  |- banner.svg
-|  +- bar_chart_race.gif         # Animació generada automàticament
+|  |- bar_chart_race.gif         # Animació generada automàticament
+|  +- viz/                       # Gràfics estàtics del README (PNG)
 |- .github/workflows/
 |  +- update.yml                 # Actualització automàtica trimestral
 |- LICENSE
@@ -171,8 +214,9 @@ Les dades es descarreguen directament de l'[API de l'INE](https://servicios.ine.
 pip install -r scripts/requirements.txt
 python scripts/update_data.py
 
-# Regenerar visualització
-python scripts/generate_chart.py
+# Regenerar visualitzacions
+python scripts/generate_chart.py      # GIF bar chart race
+python scripts/generate_visuals.py    # gràfics estàtics (assets/viz/)
 ```
 
 Un [GitHub Actions workflow](.github/workflows/update.yml) executa aquest procés automàticament cada trimestre.
