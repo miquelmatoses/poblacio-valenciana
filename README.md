@@ -255,7 +255,7 @@ Licensed under [CC0 1.0 (Public Domain)](LICENSE).
 
 <div align="center">
 
-![Darrera actualització](https://img.shields.io/github/last-commit/miquelmatoses/poblacio-valenciana?style=flat-square&color=0047ba&label=Darrera%20actualitzaci%C3%B3)
+![Darrera actualització](https://img.shields.io/github/last-commit/miquelmatoses/poblacio-valenciana?style=flat-square&color=0047ba&label=Darrera%20actualitzaci%C3%B3&cacheSeconds=7200)
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0047ba,50:0047ba,100:0047ba&height=80&section=footer&text=&animation=fadeIn" width="100%"/>
 
