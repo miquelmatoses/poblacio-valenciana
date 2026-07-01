@@ -63,7 +63,7 @@
 
 *Canvi de població per municipi (1950→2025): la costa creix (verd), l'interior es buida (roig). La «Comunitat Valenciana buidada».*
 
-🗺️ **[Mapa interactiu](https://htmlpreview.github.io/?https://github.com/miquelmatoses/poblacio-valenciana/blob/main/assets/map/index.html)** — passa el ratolí per veure cada municipi.
+🗺️ **[Mapa interactiu](https://miquelmatoses.github.io/poblacio-valenciana/assets/map/)** — passa el ratolí per veure cada municipi.
 
 </div>
 
